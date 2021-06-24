@@ -1,6 +1,10 @@
 # Youtube-Trending-Analysis-with-Hadoop-and-Spark
+
+For detailed technical design and decription, please refer to Youtube Analysis_report.PDF
 1.Analysis Workload Description
- 1.1 Category and Trending Correlation
+
+1.1 Category and Trending Correlation
+
 Some videos are trending in multiple countries. We are interested to know if there is any
 correlation between category and overlapping trending. For instance, if UK and CA users
 have common interests in music, but very different interest in sports, we might see 3%
