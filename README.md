@@ -1,6 +1,7 @@
 # Youtube-Trending-Analysis-with-Hadoop-and-Spark
 
 For detailed technical design and decription, please refer to Youtube Analysis_report.PDF
+
 1.Analysis Workload Description
 
 1.1 Category and Trending Correlation
