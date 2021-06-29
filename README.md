@@ -1,5 +1,16 @@
 # Youtube-Trending-Analysis-with-Hadoop-and-Spark
 
+Library required to run the code:
+-pyspark
+
+Python Version: 3.3 or higher
+
+Development Environment: PyCharm
+
+The MapReduce implementation should run in a pseudo-distributed mode.
+
+The Spark implementation should run in a standalone cluster or YARN cluster on a single machine.
+
 For detailed technical design and decription, please refer to Youtube Analysis_report.PDF
 
 1.Analysis Workload Description
@@ -30,23 +41,35 @@ category in UK’s trending list. 17.1% of the 100 videos also appear in US’s 
 Listing a video as trending would help it attract more views. The view number may quickly
 increase after a video is listed as trending for the first time. In fact it is not unusual for the
 view number to double between a video’s first and second trending appearance.
+
 Below are a few records of a particular video:
 videoID Trending Date Publish Time Views Country
+
 xYtsL9znopI 18.17.02 2018-02-16T14:00:09.000Z 960453 CA
+
 xYtsL9znopI 18.18.02 2018-02-16T14:00:09.000Z 2109193 CA
+
 xYtsL9znopI 18.19.02 2018-02-16T14:00:09.000Z 2768767 CA
+
 xYtsL9znopI 18.20.02 2018-02-16T14:00:09.000Z 3213410 CA
+
 The video has four trending appearances in CA between February 17 of 2018 and February
 20 of 2018. The view number in its first appearance (2018/02/17) is 960,453; the view
 number in its second appearance (2018/02/18) is 2,109,193. There is a 119.6% increase
 between the second and first appearance. In contrast the increase between the third and
 the second appearance is only 31.2%.
+
 In this workload, it is expected to find out, for each country, all videos that have greater than or equal to 1,000% increase in viewing number between its second and first
 trending appearance. The result should be grouped by country and sorted discerningly by
 percent increase.
+
 The result would look like
+
 DE; V1zTJIfGKaA, 19501.9%
+
 DE; RIgNyiGttog, 12346.5%
+
 ...
 CA; _I_D_8Z4sJE, 8438.1%
+
 CA; -K9ujx8vO_A, 8298.3%
