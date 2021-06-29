@@ -5,6 +5,9 @@ def read_map_output(file):
         yield line.strip().split("\t",3)
 
 '''
+Combiner is used to minimize the input to reduce phase by removing the duplicate records. 
+This is achieved by using country plus video id to search in the list created in the combiner function, if there is no hit, the combiner will output the results. 
+Otherwise it will jump to the next record, denoting a detection of duplicate records.
 '''
 def combiner():
     data = read_map_output(sys.stdin)
