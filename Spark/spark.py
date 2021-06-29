@@ -3,9 +3,10 @@ import argparse
 
 from pyspark.sql import SparkSession
 
-
+# create spark session
 spark = SparkSession.builder.appName("Application Name").getOrCreate()
 
+# function to extract data from source data, the target data is video id, country name, number of views. The result will be country name + video id and the corresponding views.
 def extractData(record):
     try:
         video_id = record.split(",")[0]
@@ -17,7 +18,7 @@ def extractData(record):
     except:
         return ()
 
-
+# function to find out all video ids that have greater than or equal to 1000% increase in viewing number between its second and first trending appearance.
 def Process(line):
     try:
         if len(list(line[1])) >= 2:
@@ -43,6 +44,7 @@ def Process(line):
     except:
         pass
 
+# split and regroup result based on country, increase% and video id.
 def Final_sort(list):
         print(len(list))
 
@@ -52,7 +54,7 @@ def Final_sort(list):
 
         return(country+"-"+increase,id)
 
-
+# reformat the result to country+ video id + increase%.
 def reorder(list):
     country,increase=list[0].split("-")
     id=list[1]
@@ -75,19 +77,21 @@ if __name__ == "__main__":
 
  data = spark.read.csv(input_path+"Allvideos.csv", header=True).rdd
 
-
+# build rdd pairs,map all incoming data to a country;videoid,views format by using lambda function.
  data1=data.map(lambda x: (x.country + ";"+x.video_id,x.views))
 
 
-
+# use lambda function and groupbykey to get country+video_id, plus a list storing all the views in chronological order.
  processed_data = data1.groupByKey().map(lambda x: (x[0], list(x[1])))
 
 
+# apply process function to find out whether in a given country+video_id key, a 1000% increase in view exists or not. if it exists, return the key and % increase.
  result = processed_data.map(Process)
 
+# apply filter function to keep all valid results (those have more than 1000% increase in view)
  result2= result.filter(lambda x:  x is not None)
 
-
+# map and apply final_sort and reorder function to reformat the result, output the result. 
  result3=result2.map(Final_sort)
 
  res = result3.sortByKey(False)
