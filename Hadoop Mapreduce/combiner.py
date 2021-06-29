@@ -4,7 +4,8 @@ def read_map_output(file):
     for line in file:
         yield line.strip().split("\t",3)
 
-
+'''
+'''
 def combiner():
     data = read_map_output(sys.stdin)
     list=[]
