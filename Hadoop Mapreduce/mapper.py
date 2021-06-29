@@ -1,8 +1,10 @@
 import sys
 
+# declare two country codes as the args. 
 c1 = sys.argv[1]
 c2 = sys.argv[2]
 
+# extract information from the source data based on the country code given (declared as c1 and c2). indicator 1 means it refers to c1 and indicator 2 means it refers to c2, the output from the map phase will be formatted as (category,video_id,country and indicator).
 def mapper():
     category = ""
     video_id = ""
